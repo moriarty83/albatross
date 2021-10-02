@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+    
+    <h2>Are You Sure You Want to Delete</h2>
+    <h2><%= course.title %></h2>
+
+    <a href="/mycourses<%= course._id %>"><button>Cancel</button></a>
+    <form action="/mycourses/<%= course._id %>?_method=DELETE" method="POST">
+        <input  type="submit" value="Confirm">
+    </form>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+    <form action="/mycourses" method="POST">
+        <fieldset>
+            <legend>New Course</legend>
+            <label for="title">Course Name</label>
+            <input type="text" name="title" id="title">
+            
+            <label for="type">Type</label>
+            <select name="type" id="type">
+                <option value="" disabled selected hidden>Choose a type</option>
+                <option value="Traditional Golf">Traditional Golf</option>
+                <option value="Putt Putt">Putt Putt</option>
+                <option value="Disc Golf">Disc Golf</option>
+            </select>
+
+            <label for="holes">Number of Holes</label>
+            <input type="number" name="holes" id="holes">
+
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location">
+
+            <label for="public">Share?</label>
+            <input type="checkbox" name="isPublic" id="public">
+
+            <input type="hidden" name="createdBy">
+        </fieldset>
+        <input type="submit" value="Create Course">
+    </form>
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

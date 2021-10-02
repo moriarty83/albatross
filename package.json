@@ -10,11 +10,17 @@
   "author": "C. Marshall Moriarty",
   "license": "ISC",
   "dependencies": {
+    "connect-mongo": "^4.6.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-openid-connect": "^2.5.1",
+    "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "mongoose": "^6.0.7",
+    "morgan": "^1.10.0",
+    "passport": "^0.5.0",
+    "passport-auth0": "^1.4.0",
     "path": "^0.12.7"
   }
 }

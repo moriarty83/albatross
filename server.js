@@ -2,16 +2,27 @@
 // DEPENDENCIES
 ////////////////////////////
 const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const router = express.Router();
-const methodOverride = require('method-override')
 
+const middleware = require('./util/middleware')
+
+// Auth0 Dependencies
+const { auth } = require('express-openid-connect');
+const { requiresAuth } = require('express-openid-connect');
 
 const app = express();
-const db = mongoose.connection;
 
-dotenv.config();
+
+require('dotenv').config();
+
+// AUTH0 CONFIG
+const config = {
+	authRequired: false,
+	auth0Logout: true,
+	secret: process.env.AUTH0_CLIENT_SECRET,
+	baseURL: 'http://localhost:3000',
+	clientID: 'yEqtB27DBHpzdGebqWUsZ8gxEshgG94p',
+	issuerBaseURL: 'https://dev-oxzyqg97.us.auth0.com'
+  };
 
 ////////////////////////////
 // PORT
@@ -21,38 +32,29 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 ////////////////////////////
-// DATABASE
-////////////////////////////
-const MONGODB_URI = process.env.MONGODB_URI;
-
-// Connect to MongoDB
-mongoose.connect(MONGODB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
-
-// Error / success
-db.on('error', (err) => console.log(err.message + ' is mongod not running?'));
-db.on('connected', () => console.log('mongod connected: ', MONGODB_URI));
-db.on('disconnected', () => console.log('mongod disconnected'));
-
-////////////////////////////
 // MIDDLEWARE
 ////////////////////////////
-app.use(express.urlencoded({extended: false}));
-app.use(express.static('public'));
-app.use(methodOverride('_method'));
-app.use(express.json());
+app.use(auth(config))
+middleware(app);
+
+// Auth0 Middleware
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+;
+
 
 ////////////////////////////
-// ROUTES
+// AUTH0 ROUTES
 ////////////////////////////
-const courseController = require('./controllers/courses.js')
+//req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
 
+app.get('/profile', requiresAuth(), (req, res) => {
+	console.log(req.oidc.user.email);
+	res.send(JSON.stringify(req.oidc.user));
+  });
 
-app.get('/courses', courseController.getCourseIndex);
-
-app.post('/courses', courseController.postCreateCourse);
 
 
 ////////////////////////////

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+    Title: <%= course.title %><br>
+    Type: <%= course.type %><br>
+    Holes: <%= course.holes %><br>
+    Location: <%= course.location %>
+
+    <a href="/mycourses/<%= course.id %>/edit"><button>Edit Course Details</button></a>
+    <a href="/mycourses/<%= course.id %>/editholes"><button>Edit Holes</button></a>
+
+    <a href="/mycourses/<%= course.id %>/delete"><button>Delete Course</button></a>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

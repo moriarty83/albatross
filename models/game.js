@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require('./connection');
+
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema(
     {
-        title: String,
-        type: String,
-        holes: Number,
-        location: String
+        course: String,
+        holes: Array,
+        note: String,
+        complete: Boolean,
     },
     { timestamps: true }
 );

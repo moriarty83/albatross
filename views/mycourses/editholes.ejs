@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+    <h1><%= course.title %></h1>
+
+    <form action="/mycourses/<%= course._id %>/holes?_method=PUT" method="POST">
+        <fieldset>
+            <legend>Pars</legend>
+            <% for(let i = 0; i < course.holes; i++){%>
+            <label for="par<%=i%>">Hole <%= i+1 %></label>
+            <input type="number" name="par<%=i%>" id="par">
+            <% } %>
+        </fieldset>
+
+    <input type="submit" value="Update Holes">
+    </form>
+        
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

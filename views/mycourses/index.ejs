@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+<body>
+
+    
+<body>
+    <%- include("../partials/header.ejs") %>
+    
+    <ul>
+        <% for(course of courses) { %>
+            <li><a href="/mycourses/<%= course.id %>"><%= course.title %></a></li>
+        <% } %>
+    </ul> 
+
+    <a href="/mycourses/new">New Course</a>
+    <%- include("../partials/footer.ejs") %> 
+</body>
+</html>
