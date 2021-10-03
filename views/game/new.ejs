@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+
+    <form action="/game" method="POST">
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date">
+
+        <label for="course">Course</label>
+        <select name="course" id="course">
+            <option value="" disabled selected hidden>Choose a course</option>
+            <% for (course of courses){%>}
+            <option value="<%= course._id %>"><%= course.title %></option>
+            <% } %>
+        </select>
+
+        <input type="submit" value="Start Game">
+    </form>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

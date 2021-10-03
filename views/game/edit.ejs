@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+    
+    <h1><%= game.course %></h1>
+    <form action="/game/<%= game._id %>?_method=PUT" method="POST">
+
+    <% for(let i = 0; i < game.pars.length; i++){%>
+    <h3>Hole <%= i + 1%>: Par <%= game.pars[i] %></h3>
+
+    <label for="strokes<%= i %>">Strokes <%= i +1 %></label>
+    <input type="number" name="strokes<%= i %>" id="strokes<%= i %>" <% if(game.strokes[i] !== null && game.strokes[i] != 0){%> value="<%= game.strokes[i] %>"<% } %> >
+    
+    <label for="notes<%= i %>">Notes</label>
+    <input type="text" name="notes<%= i %>" id="notes<%= i %>" <% if(game.holeNotes[i] !== null){%> value="<%= game.holeNotes[i] %>"<% } %> >
+
+    <% } %>
+    <br>
+    <label for="completed">Completed</label>
+    <input type="checkbox" name="completed" id="completed">
+
+    <input type="submit" value="Save & Continue">
+
+
+    </form>
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

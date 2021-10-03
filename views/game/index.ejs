@@ -5,9 +5,10 @@
     <%- include("../partials/header.ejs") %>
     
     <ul>
-        <% for (course of courses){%>
+        <% for (game of games){%>
         <li>
-            <%= course.title %>
+            <%= game.course %> - <%= game.date %><br>
+            Completed: <%= game.complete %>
         </li> <% } %>
     </ul>
 

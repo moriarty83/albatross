@@ -35,7 +35,7 @@ router.get('/:id/delete', (req, res)=>{
 
 // Delete
 router.delete('/:id', (req, res)=>{
-  Course.findOneAndDelete(req.params.id, (err, deletedCourse)=>{
+  Course.findByIdAndDelete(req.params.id, (err, deletedCourse)=>{
     res.redirect('/mycourses');
   });
 });

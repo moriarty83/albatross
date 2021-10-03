@@ -12,6 +12,7 @@ const { requiresAuth } = require('express-openid-connect');
 
 // Routers
 const MycoursesRouter = require('../controllers/mycourses');
+const GameRouter = require('../controllers/game')
 
 
 
@@ -28,6 +29,7 @@ const middleware = (app) => {
     // TODO: app.use session stuff
 
     app.use('/mycourses', MycoursesRouter);
+    app.use('/game', GameRouter);
 }
 
 module.exports = middleware;
