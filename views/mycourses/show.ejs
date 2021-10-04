@@ -3,10 +3,32 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    Title: <%= course.title %><br>
-    Type: <%= course.type %><br>
-    Holes: <%= course.holes %><br>
-    Location: <%= course.location %>
+    <div class="container">
+        <div class="course-details">
+            Title: <%= course.title %><br>
+            Type: <%= course.type %><br>
+            Holes: <%= course.holes %><br>
+            Location: <%= course.location %>
+        </div>
+        
+        <div class="course-image">
+            <img src="/images/<% if(course.type === 'Traditional Golf') {%>traditional.png<% }else if(course.type === 'Putt Putt'){%>puttputt.png<%} else {%>disc.png<% } %>" alt="">
+        </div>
+
+        <div class="holes-details">
+            <table>
+                <tr><th>Hole</th><th>Par</th></tr>
+                <% for(let i = 0; i < course.pars.length; i ++){ %>
+                    <tr>
+                        <td><%= i+1 %></td><td><%= course.pars[i] %></td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+
+    </div>
+
+
 
     <a href="/mycourses/<%= course.id %>/edit"><button>Edit Course Details</button></a>
     <a href="/mycourses/<%= course.id %>/editholes"><button>Edit Holes</button></a>

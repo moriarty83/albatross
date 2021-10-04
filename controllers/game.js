@@ -31,6 +31,11 @@ router.get('/new', (req, res)=>{
 });
 
 // Delete
+router.delete('/:id', (req, res)=>{
+    Game.findByIdAndDelete(req.params.id, (err, deletedCourse)=>{
+        res.redirect('/game')
+    });
+});
 
 // Update
 router.put('/:id', (req, res)=>{
@@ -86,6 +91,11 @@ router.get('/:id/edit', (req, res)=>{
 });
 
 // Show
+router.get('/:id', (req, res)=>{
+    Game.findById(req.params.id, (err, foundGame)=>{
+        res.render('game/show.ejs', {'game': foundGame})
+    })
+});
 
 
 ///////////////////////

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+
+    <h1><%= game.course %></h1>
+
+    <% if(!game.complete){%> <a href="/game/<%= game._id %>/edit"><button>Continue Game</button></a> <% } %>
+    
+    <form action="/game?_method=DELETE" method="POST">
+    <input type="submit" value="Delete Game">
+    </form>
+    
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

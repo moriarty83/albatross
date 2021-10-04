@@ -16,7 +16,10 @@ const router = express.Router();
 
 // Index
 router.get ('/', requiresAuth(), (req, res) =>{
-  Course.find(req.params.id, (error, foundCourses)=>{
+  const filterQuery = req.query.filter;
+  const filter = filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
+  
+  Course.find(filter, (error, foundCourses)=>{
       res.render('mycourses/index.ejs', {courses:foundCourses});
   });
 });

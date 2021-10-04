@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    font-family: 'Major Mono Display', monospace;
+}
+
+/* NAVBAR STYLES */
+nav{
+    box-shadow: 0px 4px 4px darkgray;
+}
+.nav-container{
+    height: 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.title{
+    padding: 0;
+    margin: .0;
+    font-size: 3em;
+}
+.title-image{
+    height: .75em;
+}
+
+.nav-links{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+
+
+.bg-whitesmk{
+    background-color: whitesmoke;
+}
+
+.tx-black{
+    color: black;
+}
+
+.no-bullet{
+    list-style-type: none;
+}
+
+.dropdown-items{
+
+    padding: .5em;
+}
+
+.container{
+    background-color: whitesmoke;
+    padding: 2em 0 5em 0;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.slide{
+    background-color: white;
+    margin: 1em;
+    height: 25em;
+    width: 15em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px black solid;
+    border-radius: .25em;
+    box-shadow: 2px 2px 2px gray;
+}
+
+.slide-text{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.slide-image{
+    margin: 1em;
+    border: 2px solid black;
+    shadow: 2px 2px 4px gray;
+    height: 60%;
+}
+
+
+.absolute{
+    position:absolute;
+}

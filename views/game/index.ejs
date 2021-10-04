@@ -7,7 +7,7 @@
     <ul>
         <% for (game of games){%>
         <li>
-            <%= game.course %> - <%= game.date %><br>
+            <a href="/game/<%= game._id %>"><%= game.course %></a> - <%= game.date %><br>
             Completed: <%= game.complete %>
         </li> <% } %>
     </ul>

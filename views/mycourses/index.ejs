@@ -8,12 +8,25 @@
     
 <body>
     <%- include("../partials/header.ejs") %>
-    
-    <ul>
+    <div class="container">
         <% for(course of courses) { %>
-            <li><a href="/mycourses/<%= course.id %>"><%= course.title %></a></li>
-        <% } %>
-    </ul> 
+    <div class="slide">
+        <div class="slide-head">
+            <p class="slide-title slide-text"><%= course.title %></p>
+            <p class="slide-type slide-text"><%= course.type %></p>
+        </div>
+        <img class="slide-image" src="/images/<% if(course.type === 'Traditional Golf') {%>traditional.png<% }else if(course.type === 'Putt Putt'){%>puttputt.png<%} else {%>disc.png<% } %>" alt="">
+        <p class="slide-text"><%= course.holes %> Holes</p>
+        <div class="actions">
+            <a href="/mycourses/<%= course._id %>"><button>Details</button></a>
+            <form action="/game" method="POST">
+                <input type="hidden" name="course" value="<%= course.id %>">
+            <input type="submit" value="Play Course">
+            </form>
+        </div>
+    </div>
+    <% } %>
+</div>
 
     <a href="/mycourses/new">New Course</a>
     <%- include("../partials/footer.ejs") %> 
