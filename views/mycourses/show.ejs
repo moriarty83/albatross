@@ -3,38 +3,64 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    <div class="container">
-        <div class="course-details">
-            Title: <%= course.title %><br>
-            Type: <%= course.type %><br>
-            Holes: <%= course.holes %><br>
-            Location: <%= course.location %>
-        </div>
-        
-        <div class="course-image">
-            <img src="/images/<% if(course.type === 'Traditional Golf') {%>traditional.png<% }else if(course.type === 'Putt Putt'){%>puttputt.png<%} else {%>disc.png<% } %>" alt="">
-        </div>
+    <div class="flex wrap column center-items space-around whitesmoke">
+        <div class="flex wrap column center-items white margin-1 border-black shadow-gray radius-5 width-75">
+            <h1 class="underline"><%= course.title %></h1>
+            <h2 class="center-text"><%= course.holes %> Hole <%= course.type %> Course</h2>
+                
+            <div class="flex column space-around center-items wrap width-75 holes-details border-black shadow-gray radius-5 whitesmoke">
+                <img class="max-width15 margin-1 shadow-gray border-black radius-5" src="/images/puttputt.png" alt="">
+                
+                <div class="flex row space-around wrap center-items width-90">
 
-        <div class="holes-details">
-            <table>
-                <tr><th>Hole</th><th>Par</th></tr>
-                <% for(let i = 0; i < course.pars.length; i ++){ %>
-                    <tr>
-                        <td><%= i+1 %></td><td><%= course.pars[i] %></td>
-                    </tr>
-                <% } %>
-            </table>
+                    <% const columns = Math.ceil(course.pars.length/9); 
+                    const rows = Math.ceil(course.pars.length/columns)%>
+                
+                    <% for(let i = 0; i < columns; i++){ %>
+                        <div>
+                        <table class="table-5-15 inline-block">
+                        <th class="white border-black radius-5">Hole</th><th class="width3 white border-black radius-5 inline-block">Par</th>
+                        <% for(let j = 0; j < rows; j++){ %>
+                            <% if(i*j < course.pars.length){%>
+                            <tr >
+                                <td class="white border-black radius-5"><%= j + rows*i + 1 %></td>
+                                <td class="white border-black radius-5"><%= course.pars[j + rows*i] %></td>
+                            </tr>
+                            <% } %>
+                        <% } %>
+                        </table>
+                    </div>
+                    <% } %>
+
+                    
+                </div>
+            </div>
+            <% if(canEdit === true){%>
+            <div class="flex row space-around margin-1">
+                <a href="/mycourses/<%= course._id %>/edit"><button>Edit Course</button></a>
+                <form action="/mycourses?_method=DELETE" method="POST" onClick="return confirmSubmit()">
+                    <input type="submit" value="Delete Course">
+                </form>
+            </div>
+            <% } %>
         </div>
 
     </div>
 
+    
 
 
-    <a href="/mycourses/<%= course.id %>/edit"><button>Edit Course Details</button></a>
-    <a href="/mycourses/<%= course.id %>/editholes"><button>Edit Holes</button></a>
-
-    <a href="/mycourses/<%= course.id %>/delete"><button>Delete Course</button></a>
 
     <%- include("../partials/footer.ejs") %>
+    <script LANGUAGE="JavaScript">
+        function confirmSubmit()
+        {
+        var agree=confirm("Are you sure you want to delete this game?");
+        if (agree)
+         return true ;
+        else
+         return false ;
+        }
+        </script>
 </body>
 </html>

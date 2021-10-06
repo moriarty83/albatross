@@ -3,14 +3,15 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    
-    <ul>
-        <% for (game of games){%>
-        <li>
-            <a href="/game/<%= game._id %>"><%= game.course %></a> - <%= game.date %><br>
-            Completed: <%= game.complete %>
-        </li> <% } %>
-    </ul>
+    <div class="container">
+        <ul>
+            <% for (game of games){%>
+            <li>
+                <a href="/game/<%= game._id %>"><%= game.course %></a> - <%= game.date %><br>
+                Completed: <%= game.complete %>
+            </li> <% } %>
+        </ul>
+    </div>
 
     <%- include("../partials/footer.ejs") %>
 </body>

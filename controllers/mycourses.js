@@ -15,10 +15,20 @@ const router = express.Router();
 ///////////////////////
 
 // Index
-router.get ('/', requiresAuth(), (req, res) =>{
+router.get ('/', (req, res) =>{
   const filterQuery = req.query.filter;
-  const filter = filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
-  
+  let filter;
+
+  // Determines filter based on if User is Authenticated
+  if(req.oidc.isAuthenticated())
+  {
+    console.log("logged in")
+     filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
+  }
+  // If not authenticated, only shows public items.
+  else{
+    filter = {isPublic: true}
+  }
   Course.find(filter, (error, foundCourses)=>{
       res.render('mycourses/index.ejs', {courses:foundCourses});
   });
@@ -30,38 +40,51 @@ router.get('/new', requiresAuth(), (req, res)=>{
 });
 
 // Confirm Delete
-router.get('/:id/delete', (req, res)=>{
+router.get('/:id/delete', requiresAuth(), (req, res)=>{
   Course.findById(req.params.id, (err, foundCourse)=>{
     res.render('mycourses/delete.ejs', {'course': foundCourse});
   });
 });
 
 // Delete
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', requiresAuth(), (req, res)=>{
   Course.findByIdAndDelete(req.params.id, (err, deletedCourse)=>{
     res.redirect('/mycourses');
   });
 });
 
-
 // Update Course
-
+router.put('/:id', requiresAuth(), (req, res)=>{
+  req.body.isPublic = req.body.isPublic === "on" ? true : false;
+  Course.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedCourse)=>{
+    res.redirect('/mycourses/'+updatedCourse._id+'/editholes')
+  })
+})
 
 // Update Pars
-router.put('/:id/holes', (req, res)=>{
+router.put('/:id/holes', requiresAuth(), (req, res)=>{
   console.log(req.body);
   let newPars = new Array();
   for(const par in req.body){
     newPars.push(+req.body[par]);
   }
-  Course.findByIdAndUpdate(req.params.id, {pars: newPars}, {new: true }, (err, updatedCourse)=>{
-    console.log(updatedCourse);
-    res.redirect('/mycourses');
+  req.body.totalPars = newPars.reduce((a, b) => a + b, 0);
+  // Checks User against Created By
+  Course.findById(req.params.id, (err, foundCourse)=>{
+    //Rejects Update if User/Createdby Don't match
+    if(foundCourse.createdBy !== req.oidc.user.email){
+      res.render('mycourses/error.ejs', {'message': 'You do not have permission to edit this course'});
+    }
+
+    // Updates
+    Course.findByIdAndUpdate(req.params.id, {pars: newPars, totalPar: req.body.totalPars}, {new: true }, (err, updatedCourse)=>{
+      res.redirect('/mycourses');
+    });
   });
 });
 
 // Create
-router.post('/', (req, res)=>{
+router.post('/', requiresAuth(), (req, res)=>{
   const pars = new Array();
   for(let i = 0; i < req.body.holes; i++){pars.push(null)};
   req.body.isPublic = req.body.isPublic === "on" ? true : false;
@@ -76,23 +99,30 @@ router.post('/', (req, res)=>{
 });
 
 // Edit Course
-router.get('/:id/edit', (req, res)=>{
+router.get('/:id/edit', requiresAuth(), (req, res)=>{
   Course.findById(req.params.id, (err, foundCourse)=>{
-    res.render('mycourses.edit.ejs', {'course': foundCourse})
+    if(foundCourse.createdBy !== req.oidc.user.email){
+      res.render('mycourses/error.ejs', {'message': 'You do not have permission to edit this course'})
+    }
+    res.render('mycourses/edit.ejs', {'course': foundCourse})
   });
 });
 
 // Edit Pars
-router.get('/:id/editholes', (req, res)=>{
+router.get('/:id/editholes', requiresAuth(), (req, res)=>{
   Course.findById(req.params.id, (err, foundCourse)=>{
+    if(foundCourse.createdBy !== req.oidc.user.email){
+      res.render('mycourses/error.ejs', {'message': 'You do not have permission to edit this course'})
+    }
     res.render('mycourses/editholes.ejs', {'course': foundCourse});
   });
 });
 
 // Show
-router.get('/:id', (req, res) => {
+router.get('/:id', requiresAuth(), (req, res) => {
   Course.findById(req.params.id, (error, foundCourse)=>{
-    res.render('mycourses/show.ejs', {course: foundCourse});
+    const canEdit = foundCourse.createdBy === req.oidc.user.email ? true : false;
+    res.render('mycourses/show.ejs', {'course': foundCourse, 'canEdit': canEdit});
   });
 });
 

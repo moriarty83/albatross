@@ -3,18 +3,23 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    <h1><%= course.title %></h1>
+    <h1 class="margin-1 underline"><%= course.title %></h1>
 
-    <form action="/mycourses/<%= course._id %>/holes?_method=PUT" method="POST">
+    <form action="/mycourses/<%= course._id %>/holes?_method=PUT" class="width-50 margin-1" method="POST">
         <fieldset>
             <legend>Pars</legend>
+            <table class="table-5-15">
             <% for(let i = 0; i < course.holes; i++){%>
-            <label for="par<%=i%>">Hole <%= i+1 %></label>
-            <input type="number" name="par<%=i%>" id="par">
+                <tr>
+            <td><label for="par<%=i%>">Hole <%= i+1 %></label></td>
+            <td><input type="number" name="par<%=i%>" id="par"></td>
+        </tr>
             <% } %>
+        </table>
+        <input type="submit" value="Update Holes">
         </fieldset>
 
-    <input type="submit" value="Update Holes">
+    
     </form>
         
     <%- include("../partials/footer.ejs") %>

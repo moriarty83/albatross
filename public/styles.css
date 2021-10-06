@@ -3,6 +3,150 @@ body{
     font-family: 'Major Mono Display', monospace;
 }
 
+
+
+
+/* DISPLAY STYLES */
+.block{
+    display: block;
+}
+
+.flex{
+    display: flex;
+}
+
+.row{
+    flex-direction: row;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+.space-around{
+    justify-content: space-around;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.center-items{
+    align-items: center;
+}
+
+/* COLORS */
+
+.whitesmoke{
+    background-color: whitesmoke;
+}
+
+.white{
+    background-color: white;
+}
+
+.lt-gray{
+background-color: rgb(168, 138, 138);
+}
+
+/* SIZE STYLINGS */
+.width-25{
+    width: 25%;
+}
+
+.width-50{
+    width: 50%;
+}
+
+.width-75{
+    width: 75%;
+}
+.width15{
+    width: 15em;
+}
+
+.width3{
+    width: 3em;
+}
+
+.height25{
+    height: 25em;
+}
+
+.width-90{
+    width: 90%;
+}
+
+.max-width-90{
+    max-width: 90%;
+}
+
+.max-height-60{
+    max-height: 60%;
+}
+
+.max-width15{
+    max-width: 15em;
+}
+
+.height-100{
+    height: 100%;
+}
+
+/* BORDER STYLINGS */
+.border-black{
+    border: 2px solid black;
+}
+
+.shadow-gray{
+    box-shadow: 2px 2px 2px gray;
+}
+
+.radius-5{
+    border-radius: 5px;
+}
+
+
+
+/* MARGIN */
+.margin-1{
+    margin: 1em;
+}
+
+.margin-025{
+    margin: .25em;
+}
+
+.margin-2-5{
+    margin-top: 2em;
+    margin-bottom: 5em;
+}
+
+/* PADDING */
+.padding-lt-2{
+    padding-left: 2em;
+}
+
+.padding-2-5{
+    padding-top: 2em;
+    padding-bottom: 5em;
+}
+
+
+/*  TEXT */
+
+.underline{
+    text-decoration: underline;
+}
+
+.center-text{
+    text-align: center;
+}
+
 /* NAVBAR STYLES */
 nav{
     box-shadow: 0px 4px 4px darkgray;
@@ -21,6 +165,17 @@ nav{
     margin: .0;
     font-size: 3em;
 }
+
+.game-title{
+    padding: 0;
+    margin: .0;
+    font-size: 1em;
+}
+
+.scorecard{
+    margin: 1em;
+}
+
 .title-image{
     height: .75em;
 }
@@ -32,12 +187,6 @@ nav{
     
 }
 
-
-
-.bg-whitesmk{
-    background-color: whitesmoke;
-}
-
 .tx-black{
     color: black;
 }
@@ -47,23 +196,30 @@ nav{
 }
 
 .dropdown-items{
-
+    position: absolute;
     padding: .5em;
+    background-color: lightgray;
+    border: 1px solid black;
+    box-shadow: 4px 4px 6px darkgray;
 }
 
 .container{
-    background-color: whitesmoke;
     padding: 2em 0 5em 0;
-
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
+.subcontainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* SHOW STYLINGS */
 .slide{
     background-color: white;
     margin: 1em;
-    height: 25em;
     width: 15em;
     display: flex;
     flex-direction: column;
@@ -85,9 +241,76 @@ nav{
     border: 2px solid black;
     shadow: 2px 2px 4px gray;
     height: 60%;
+    max-width: 80%;
 }
 
+.actions{
+    margin: 1em;
+    display: flex;
+    justify-content: space-around;
+}
 
 .absolute{
     position:absolute;
 }
+
+.bg-ltgray{
+    background-color: lightgray;
+}
+
+.game-slide{
+    background-color: white;
+    margin: 1em;
+    min-height: 20em;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px black solid;
+    border-radius: .25em;
+    box-shadow: 2px 2px 2px gray;
+
+}
+
+.show-image{
+    max-height: 20em;
+}
+
+    
+.hole-table{
+    padding: 2em;
+    border-collapse:separate;
+    border-spacing:5px 15px;
+}
+
+.table-5-15{
+    border-collapse:separate;
+    border-spacing:5px 15px;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.margin-rt-2{
+    padding-right: 2em;
+}
+
+.course-details p{
+
+    font-size: 1.25em;
+}
+
+.course-details{
+    padding: 2em;
+    background-color: white;
+    border: 2px black solid;
+    border-radius: .25em;
+    box-shadow: 2px 2px 2px gray;
+}
+
+/* button{
+    height:15px;
+    background-color: red;
+} */

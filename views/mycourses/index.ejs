@@ -8,27 +8,23 @@
     
 <body>
     <%- include("../partials/header.ejs") %>
-    <div class="container">
+    <div class="flex row wrap space-around whitesmoke">
         <% for(course of courses) { %>
-    <div class="slide">
-        <div class="slide-head">
-            <p class="slide-title slide-text"><%= course.title %></p>
-            <p class="slide-type slide-text"><%= course.type %></p>
+        <div class="flex column spacing-around center-items width15 height25 border-black shadow-gray radius-5 margin-1">
+            <h3 class="center-text margin-025 underline"><%= course.title %></h3>
+            <h4 class="center-text margin-025"><%= course.holes %> Hole</h4>
+            <h5 class="margin-025"><%= course.type %> Course</h5>
+            <img class="width-90 max-height-60 border-black shadow-gray radius-5 margin-1" src="/images/<% if(course.type === "Disc Golf"){%>disc.png<%}else if(course.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt="">
+            <div class="actions">
+                <a href="/mycourses/<%= course._id %>"><button>Details</button></a>
+            </div>
         </div>
-        <img class="slide-image" src="/images/<% if(course.type === 'Traditional Golf') {%>traditional.png<% }else if(course.type === 'Putt Putt'){%>puttputt.png<%} else {%>disc.png<% } %>" alt="">
-        <p class="slide-text"><%= course.holes %> Holes</p>
-        <div class="actions">
-            <a href="/mycourses/<%= course._id %>"><button>Details</button></a>
-            <form action="/game" method="POST">
-                <input type="hidden" name="course" value="<%= course.id %>">
-            <input type="submit" value="Play Course">
-            </form>
-        </div>
-    </div>
+
+    
     <% } %>
 </div>
 
-    <a href="/mycourses/new">New Course</a>
+
     <%- include("../partials/footer.ejs") %> 
 </body>
 </html>

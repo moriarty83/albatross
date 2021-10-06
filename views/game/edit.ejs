@@ -5,7 +5,17 @@
     <%- include("../partials/header.ejs") %>
     
     <h1><%= game.course %></h1>
+    <p><%= game.date %></p>
+    
+
+
+
     <form action="/game/<%= game._id %>?_method=PUT" method="POST">
+
+
+
+
+
 
     <% for(let i = 0; i < game.pars.length; i++){%>
     <h3>Hole <%= i + 1%>: Par <%= game.pars[i] %></h3>

@@ -3,28 +3,44 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    
-    <form action="/mycourses/<%= course.id %>?_method=PUT" method="POST">
-        <fieldset>
-            <legend>New Course</legend>
-            <label for="name">Course Name</label>
-            <input type="text" name="title" id="name" value=<%= course.title %>>
-            <label for="type">Select Course Type</label>
-            <select name="type" id="type">
-                <option value="Traditional Golf" <% if(course.type == "Traditional Golf"){%> selected <% } %>>Traditional Golf</option>
-                <option value="Putt Putt" <% if(course.type == "Putt Putt"){%> selected <% } %>>Putt Putt</option>
-                <option value="Disc Golf" <% if(course.type == "Disc Golf"){%> selected <% } %>>Disc Golf</option>
-            </select>
-            <label for="holes">Number of Holes</label>
-            <input type="number" name="holes" id="holes">
-            <label for="location">Location</label>
-            <input type="text" name="location" id="location">
-            <input type="hidden" name="createdBy">
-            <label for="isPublic"></label>
-            <input type="checkbox" name="isPublic" id="isPublic" <% if(course.isPublic == true){%> checked="true" <% } %>>
-        </fieldset>
-        <input type="submit" value="Update">
-    </form>
+    <div class="padding-2-5 whitesmoke">
+        <h1 class=" margin-1 underline"><%= course.title %></h1> 
+        <form class="width-75 padding-lt-2" action="/mycourses/<%= course.id %>?_method=PUT" method="POST">
+            <fieldset>
+                <legend>Edit Course</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="title">Course Name</label></td>
+                        <td><input type="text" name="title" id="title" value=<%= course.title %>></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="type">Course Type</label></td>
+                        <td><select name="type" id="type">
+                            <option value="Traditional Golf" <% if(course.type == "Traditional Golf"){%> selected <% } %>>Traditional Golf</option>
+                            <option value="Putt Putt" <% if(course.type == "Putt Putt"){%> selected <% } %>>Putt Putt</option>
+                            <option value="Disc Golf" <% if(course.type == "Disc Golf"){%> selected <% } %>>Disc Golf</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="holes">Holes</label></td>
+                        <td><input type="number" name="holes" id="holes" value="<%= course.holes %>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="location">Location</label></td>
+                        <td><input type="text" name="location" id="location" value="<%= course.location %>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="isPublic">Share?</label></td>
+                        <td><input type="checkbox" name="isPublic" id="isPublic" <% if(course.isPublic == true){%> checked="true" <% } %>></td>
+                    </tr>
+
+                </table>
+            </fieldset>
+            <input class="margin-1" type="submit" value="Update">
+        </form>
+    </div>
 
     <%- include("../partials/footer.ejs") %>
 </body>

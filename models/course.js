@@ -8,6 +8,7 @@ const courseSchema = new Schema(
         type: String,
         holes: Number,
         pars: [Number],
+        totalPar: Number,
         location: String,
         createdBy: String,
         isPublic: Boolean
