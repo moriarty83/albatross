@@ -3,6 +3,24 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
+
+    <div class="flex row wrap space-around whitesmoke">
+        <% for(game of games) { %>
+        <div class="flex column spacing-around center-items width15 height25 border-black shadow-gray radius-5 margin-1">
+            <h4 class="center-text margin-025"><%= (game.date.toString()).slice(0,15) %></h4>
+            <h3 class="center-text margin-025 underline"><%= game.course %></h3>
+            <h4 class="center-text margin-025"><%= game.pars.length %> Holes</h4>
+            <h5 class="margin-025"><%= game.type %> Course</h5>
+            <a class="flex row space-around width-90 max-height-50  margin-1" href=""><img class="border-black shadow-gray radius-5" style=" height: 100%;" class="radius-5" src="/images/<% if(course.type === "Disc Golf"){%>disc.png<%}else if(course.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt=""></a>            <div class="actions">
+                <a href="/game/<%= game._id %>"><button>Details</button></a>
+            </div>
+        </div>
+
+    
+        <% } %>
+    </div>
+
+
     <div class="container">
         <ul>
             <% for (game of games){%>

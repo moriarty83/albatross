@@ -3,24 +3,52 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
+
+    <div class="flex wrap column center-items space-around whitesmoke padding-2-5">
     <h1 class="margin-1 underline"><%= course.title %></h1>
 
-    <form action="/mycourses/<%= course._id %>/holes?_method=PUT" class="width-50 margin-1" method="POST">
+    <form class="flex wrap row space-around white border-black shadow-gray radius-5 padding-1" action="/mycourses/<%= course._id %>/holes?_method=PUT" class="width-50 margin-1" method="POST">
         <fieldset>
             <legend>Pars</legend>
-            <table class="table-5-15">
-            <% for(let i = 0; i < course.holes; i++){%>
-                <tr>
-            <td><label for="par<%=i%>">Hole <%= i+1 %></label></td>
-            <td><input type="number" name="par<%=i%>" id="par"></td>
-        </tr>
-            <% } %>
-        </table>
-        <input type="submit" value="Update Holes">
+            <div class="flex row space-around wrap center-items width-90">
+
+                <% const columns = Math.ceil(course.pars.length/9); 
+                const rows = Math.ceil(course.pars.length/columns)%>
+            
+                <% for(let i = 0; i < columns; i++){ %>
+                    <div>
+                    <table class="table-5-15 inline-block">
+                    <th class="whitesmoke border-black radius-5 padding-1 center-text">Hole</th>
+                    <th class="width3 whitesmoke border-black radius-5 inline-block padding-1 center-text">Par</th>
+                    <% for(let j = 0; j < rows; j++){ %>
+                        <% if((i+1)*(j+1) <= course.pars.length){%>
+                        <tr >
+                            <td class="whitesmoke border-black radius-5 center-text"><%= j + rows*i + 1 %></td>
+                            <td class="whitesmoke border-black radius-5 center-text"><input class="margin-025 width3 center-text" type="number" name="par<%=j+rows*i%>" id="" <% if(course.pars[j+rows*i]===0 || course.pars[j+rows*i]=== null){%> value="" <%} else{ %>  value=<%= course.pars[j+rows*i]%><%}%>></td>
+                        </tr>
+                        <% } %>
+                    <% } %>
+                    
+
+                    </table class="table-5-15">
+                </div>
+                <% } %>
+                <table>
+                <tr >
+                    <td class="whitesmoke border-black radius-5 center-text margin-1"><input type="submit" value="Update Holes"></td>
+                    <td class="whitesmoke border-black radius-5 center-text margin-1"><a href="/mycourses/<% course._id%>"><Button>Cancel</Button></a></td>
+                </tr>
+                </table>
+
+                
+            </div>
+        
         </fieldset>
 
     
     </form>
+
+</div>
         
     <%- include("../partials/footer.ejs") %>
 </body>

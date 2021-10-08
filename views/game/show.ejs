@@ -3,48 +3,59 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    <div class="container">
+    <div class="flex column space-around center-items whitesmoke">
         <div class="game-slide">
                 <div class="game-title">
-                <h1><%= game.course %></h1>
-                <h2><%= (game.date.toString()).slice(0,15) %></h2>
+                <h1 class="center-text"><%= game.course %></h1>
+                <h2 class="center-text"><%= (game.date.toString()).slice(0,15) %></h2>
             </div>
-            <div class="subtitle">
-                <h3><%= game.pars.length %> Holes -- Par: <%= game.totalPar %> -- Score: <%= game.totalScore %></h3>
+            <div class="flex row space-around center-items width-75 height03">
+                <h3 class="inline"><%= game.pars.length %> Holes  </h3>  <img class="height-75" src=/images/icon.png>  <h3>Par: <%= game.totalPar %></h3>  <img class="height-75" src=/images/icon.png>  <h3>Score: <%= game.totalScore %></h3>
             </div>
 
 
-            <div class="scorecard">
-                <table>
-                    <% const columns = Math.ceil(game.pars.length/9); 
-                    const rows = Math.ceil(game.pars.length/columns)%>
-                    <tr>
-                    <% for(let i = 0; i < columns; i++){ %>
-                        
-                            <th>Hole <%= i+1 %></th><th>Par</th><th>Strokes</th><th>Score</th>
-                    <% } %>
-                    </tr>
+            <div class="flex row space-around wrap center-items width-90">
+
+                <% const columns = Math.ceil(game.pars.length/9); 
+                const rows = Math.ceil(game.pars.length/columns)%>
             
-                    <% for(let i = 0; i < rows; i++){ %>
+                <% for(let i = 0; i < columns; i++){ %>
+                    
+                    <table class="table-5-15">
                         <tr>
-                            <% for(let j = 0; j < columns; j++ ){%>
-                                <% if (i+(j*rows) > game.pars.length-1) {%> 
-                                    
-                                <%} else{%>
-                                    <td><%= i+(j*rows)+1 %></td><td><%= game.pars[i+(j*rows)] %></td><td><%= game.strokes[i+(j*rows)] %></td><td><%= game.holeScore[i+(j*rows)] %></td>
-                            <% } %>
-                            <% } %>
+                            <th class="whitesmoke border-black radius-5 padding-1 center-text">Hole</th>
+                            <th class="width3 whitesmoke border-black radius-5 padding-1 center-text">Par</th>
+                            <th class="width3 whitesmoke border-black radius-5 padding-1 center-text">Strokes</th>
+                            <!-- <th class="whitesmoke border-black radius-5 padding-1 center-text">Comments</th> -->
                         </tr>
-                        
-                    <% } %>
+                    <% for(let j = 0; j < rows; j++){ %>
+                        <% if((i+1)*(j+1) <= game.pars.length){%>
+                        <tr >
+                            <td class="whitesmoke border-black radius-5 center-text"><%= j + rows*i + 1 %></td>
+                            <td class="whitesmoke border-black radius-5 center-text "><%= game.pars[j + rows*i] %></td>
+                            <td class="<% if(game.strokes[j + rows*i] !== 0 && game.strokes[j + rows*i] < game.pars[j + rows*i]){%>blue<%} 
                 
+                                else if (game.strokes[j + rows*i] > game.pars[j + rows*i]){%>red<%}
+                                else if (game.strokes[j + rows*i] === game.pars[j + rows*i]){%>black<%}
+                                else{%> whitesmoke <% } %> border-black radius-5 center-text"><% if(game.strokes[j+rows*i] === 0 || game.strokes[j+rows*i] === null){%> <%}else{%> <%=game.strokes[j+rows*i]%><%}%></td>
+                            <!-- <td class="whitesmoke border-black radius-5 center-text"><input class="margin-025 center-text" type="text" name="notes<%=j+rows*i%>" id="" value=<%= game.holeNotes[j+rows*i]%>></td> -->
+
+                        </tr>
+                        <% } %>
+                    <% } %>
+                    
+                    
+                <% } %>
+
                 </table>
+
+                
             </div>
 
             <div class="actions">
                 <% if(!game.complete){%> <a href="/game/<%= game._id %>/edit"><button>Continue Game</button></a> <% } %>
 
-                <form action="/game?_method=DELETE" method="POST" onClick="return confirmSubmit()">
+                <form action="/game/<%= game._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
                     <input type="submit" value="Delete Game">
                 </form>
             </div>

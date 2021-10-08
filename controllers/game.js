@@ -18,17 +18,19 @@ const router = express.Router();
 
 // Index
 router.get('/', (req, res)=>{
+    const loggedIn = req.oidc.isAuthenticated() ? true : false;
     filter = req.query.filter === "inprogress" ? {user: req.oidc.user.email, complete: false} : req.query.filter === "complete" ? {user: req.oidc.user.email, complete: true} : {user: req.oidc.user.email};
     console.log(filter);
     Game.find(filter, (err, foundGames)=>{
-        res.render('game/index.ejs', {'games': foundGames});
+        res.render('game/index.ejs', {'games': foundGames, loggedIn: loggedIn});
      });
 })
 
 // New
 router.get('/new', (req, res)=>{
+    const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Course.find({createdBy: req.oidc.user.email}, (err, foundCourses)=>{
-        res.render('game/new.ejs', {'courses': foundCourses});
+        res.render('game/new.ejs', {'courses': foundCourses, loggedIn: loggedIn});
      });
 });
 
@@ -43,10 +45,10 @@ router.delete('/:id', (req, res)=>{
 router.put('/:id', (req, res)=>{
     // Declare attributes to be sent in update.
     const attributes = {strokes: [], holeNotes : [], gameNotes: '', holeScore:[], totalScore: 0, totalStrokes: 0, complete: false }
-    
     // Is game Complete
+    console.log(req.body.gameNotes)
     attributes.complete = req.body.completed === "on" ? true : false;
-    
+    attributes.gameNotes = req.body.gameNotes;
     // Populate hole strokes and hole notes.
     for(key in req.body){
         key.includes('strokes')? attributes.strokes.push(+req.body[key]):key.includes('notes')?attributes.holeNotes.push(req.body[key]): null;
@@ -69,8 +71,8 @@ router.put('/:id', (req, res)=>{
 
         // Updates Game
         Game.findByIdAndUpdate(req.params.id, attributes, {new: true}, (err, updatedGame)=>{
-            if(attributes.complete){
-                res.redirect('/game')
+            if(attributes.complete || req.body.returnHome === "true"){
+                res.redirect('/game/'+req.params.id)
             }
             else{
             res.redirect('/game/'+req.params.id+'/edit');
@@ -92,8 +94,9 @@ router.post('/', (req, res)=>{
             course: foundCourse.title,
             courseId: foundCourse._id,
             date: req.body.date,
+            type: foundCourse.type,
             pars: foundCourse.pars,
-            totalPar: pars.reduce((a, b) => a + b, 0),
+            totalPar: foundCourse.pars.reduce((a, b) => a + b, 0),
             strokes: new Array(foundCourse.holes),
             holeNotes: new Array(foundCourse.holes),
             gameNotes: '',
@@ -112,15 +115,17 @@ router.post('/', (req, res)=>{
 
 // Edit
 router.get('/:id/edit', (req, res)=>{
+    const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Game.findById(req.params.id, (err, foundGame)=>{
-        res.render('game/edit.ejs', {'game': foundGame});
+        res.render('game/edit.ejs', {'game': foundGame, loggedIn: loggedIn});
     }); 
 });
 
 // Show
 router.get('/:id', (req, res)=>{
+    const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Game.findById(req.params.id, (err, foundGame)=>{
-        res.render('game/show.ejs', {'game': foundGame})
+        res.render('game/show.ejs', {'game': foundGame, loggedIn: loggedIn})
     })
 });
 

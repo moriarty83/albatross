@@ -5,7 +5,7 @@
             <div class="nav-links">
                 <div class="inline-block relative flex-column mg1" x-data="{ open: false }">
                     <p @click="open = !open" class="focus:outline-none shadow cursor-pointer inline-block text-gray-700 hover:text-black flex border border-gray-400 rounded p-2 pl-3 pr-1 bg-gray-100">
-                      <a href="/">Home</a>
+                      <a href="/" class="text-black">Home</a>
                     </p>
                 </div>
 
@@ -35,7 +35,7 @@
                   
                 <div class="inline-block relative flex-column mg1" x-data="{ open: false }">
                     <p @click="open = !open" class="focus:outline-none shadow cursor-pointer inline-block text-gray-700 hover:text-black flex border border-gray-400 rounded p-2 pl-3 pr-1 bg-gray-100">
-                      <a href="/">Logout</a>
+                      <% if(loggedIn === true){%><a class="text-black" href="/logout">Logout</a><%} else {%><a class="text-black" href="/login">Sign In</a><%}%>
                     </p>
                 </div>            
             </div>

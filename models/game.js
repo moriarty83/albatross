@@ -9,6 +9,7 @@ const gameSchema = new Schema(
     {
         course: String,
         courseId: String,
+        type: String,
         date: Date,
         pars: [{type: Number}],
         strokes: [{type: Number}],

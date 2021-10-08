@@ -3,43 +3,64 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    <div class="padding-2-5 whitesmoke">
+    <div class="flex wrap column center-items space-around whitesmoke">
         <h1 class=" margin-1 underline"><%= course.title %></h1> 
-        <form class="width-75 padding-lt-2" action="/mycourses/<%= course.id %>?_method=PUT" method="POST">
+        <form class="width-75 white" action="/mycourses/<%= course._id %>?_method=PUT" method="POST">
             <fieldset>
                 <legend>Edit Course</legend>
 
-                <table>
+                <table class="table-5-15 ">
                     <tr>
-                        <td><label for="title">Course Name</label></td>
-                        <td><input type="text" name="title" id="title" value=<%= course.title %>></td>
+                        <td class="inline-block whitesmoke padding-1 border-black shadow-gray radius-5"><label for="title">Course Name</label></td>
+                        <td style="width: 1em;"></td>
+                        <td class="padding-left2 whitesmoke padding-1 border-black shadow-gray radius-5"><input type="text" name="title" id="title" value=<%= course.title %>></td>
                     </tr>
 
                     <tr>
-                        <td><label for="type">Course Type</label></td>
-                        <td><select name="type" id="type">
+                        <td class="whitesmoke padding-1 border-black shadow-gray radius-5"><label for="type">Course Type</label></td>
+                        <td style="width: 1em;"></td>
+                        <td class="padding-left2 whitesmoke padding-1 border-black shadow-gray radius-5"><select name="type" id="type">
                             <option value="Traditional Golf" <% if(course.type == "Traditional Golf"){%> selected <% } %>>Traditional Golf</option>
                             <option value="Putt Putt" <% if(course.type == "Putt Putt"){%> selected <% } %>>Putt Putt</option>
                             <option value="Disc Golf" <% if(course.type == "Disc Golf"){%> selected <% } %>>Disc Golf</option>
                         </select></td>
                     </tr>
                     <tr>
-                        <td><label for="holes">Holes</label></td>
-                        <td><input type="number" name="holes" id="holes" value="<%= course.holes %>"></td>
+                        <td class="whitesmoke padding-1 border-black shadow-gray radius-5"><label for="holes">Holes</label></td>
+                        <td style="width: 1em;"></td>
+                        <td class="padding-left2 whitesmoke padding-1 border-black shadow-gray radius-5"><input type="number" name="holes" id="holes" value="<%= course.holes %>"></td>
                     </tr>
                     <tr>
-                        <td><label for="location">Location</label></td>
-                        <td><input type="text" name="location" id="location" value="<%= course.location %>"></td>
+                        <td class="whitesmoke padding-1 border-black shadow-gray radius-5"><label for="location">Location</label></td>
+                        <td style="width: 1em;"></td>
+                        <td class="padding-left2 whitesmoke padding-1 border-black shadow-gray radius-5"><input type="text" name="location" id="location" value="<%= course.location %>"></td>
                     </tr>
                     <tr>
-                        <td><label for="isPublic">Share?</label></td>
-                        <td><input type="checkbox" name="isPublic" id="isPublic" <% if(course.isPublic == true){%> checked="true" <% } %>></td>
+                        <td class="whitesmoke padding-1 border-black shadow-gray radius-5"><label for="isPublic">Share?</label></td>
+                        <td style="width: 1em;"></td>
+                        <td class="padding-left2 whitesmoke padding-1 border-black shadow-gray radius-5"><input type="checkbox" name="isPublic" id="isPublic" <% if(course.isPublic == true){%> checked="true" <% } %>></td>
                     </tr>
 
-                </table>
+                
+
+                <tr>
+                    <td><input class="margin-1" type="submit" value="Save & Continue"></td>
+                    <td style="width: 1em;"></td>
+                    <td><a class="margin-1" href="/mycourses/<%= course._id%>"><button>Cancel</button></a></td>
+                    
+                </tr>
+            
+                
             </fieldset>
-            <input class="margin-1" type="submit" value="Update">
+        </table>
+            
+            <div>
+                
+                
+                
+            </div>
         </form>
+        
     </div>
 
     <%- include("../partials/footer.ejs") %>

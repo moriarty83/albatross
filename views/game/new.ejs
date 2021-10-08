@@ -4,20 +4,34 @@
 <body>
     <%- include("../partials/header.ejs") %>
 
-    <form action="/game" method="POST">
-        <label for="date">Date</label>
-        <input type="date" name="date" id="date">
-
-        <label for="course">Course</label>
-        <select name="course" id="course">
-            <option value="" disabled selected hidden>Choose a course</option>
-            <% for (course of courses){%>}
-            <option value="<%= course._id %>"><%= course.title %></option>
-            <% } %>
-        </select>
-
-        <input type="submit" value="Start Game">
-    </form>
+    <div class="flex column space-around center-items padding-2-5 whitesmoke">
+        <form class="flex column space-around center-items width-50 padding-lt-2" action="/game" method="POST">
+            <fieldset class="white flex column space-around center-items width-90">
+                <legend>New Game</legend>
+                    <div class="flex column space-around center-items margin-1">
+                    <label for="date">Date</label><br>
+                    <input type="date" name="date" id="date" required>
+                    </div>
+                    <br>
+                    <div class="flex column space-around center-items margin-1">
+                        <label for="course">Course</label><br>
+                        <select name="course" id="course" required>
+                            <option value="" disabled selected hidden>Choose a course</option>
+                            <% for (course of courses){%>}
+                            <option value="<%= course._id %>"><%= course.title %>: <%= course.holes %> Hole <%= course.type %> Course, <%= course.location %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    
+                    <div class="flex column space-around center-items margin-1">
+                    <input type="submit" value="Start Game">
+                    <br>
+                    <br>
+                    <a href="/game"><Button>Cancel</Button></a> 
+                </div>             
+            </fieldset>   
+        </form>
+    </div>
 
     <%- include("../partials/footer.ejs") %>
 </body>

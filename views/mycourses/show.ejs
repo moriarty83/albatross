@@ -9,7 +9,7 @@
             <h2 class="center-text"><%= course.holes %> Hole <%= course.type %> Course</h2>
                 
             <div class="flex column space-around center-items wrap width-75 holes-details border-black shadow-gray radius-5 whitesmoke">
-                <img class="max-width15 margin-1 shadow-gray border-black radius-5" src="/images/puttputt.png" alt="">
+                <img class="width15 max-width-90 margin-1 shadow-gray border-black radius-5" src="/images/puttputt.png" alt="">
                 
                 <div class="flex row space-around wrap center-items width-90">
 
@@ -21,7 +21,7 @@
                         <table class="table-5-15 inline-block">
                         <th class="white border-black radius-5">Hole</th><th class="width3 white border-black radius-5 inline-block">Par</th>
                         <% for(let j = 0; j < rows; j++){ %>
-                            <% if(i*j < course.pars.length){%>
+                            <% if((i+1)*(j+1) <= course.pars.length){%>
                             <tr >
                                 <td class="white border-black radius-5"><%= j + rows*i + 1 %></td>
                                 <td class="white border-black radius-5"><%= course.pars[j + rows*i] %></td>
@@ -38,7 +38,7 @@
             <% if(canEdit === true){%>
             <div class="flex row space-around margin-1">
                 <a href="/mycourses/<%= course._id %>/edit"><button>Edit Course</button></a>
-                <form action="/mycourses?_method=DELETE" method="POST" onClick="return confirmSubmit()">
+                <form action="/mycourses/<%= course._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
                     <input type="submit" value="Delete Course">
                 </form>
             </div>

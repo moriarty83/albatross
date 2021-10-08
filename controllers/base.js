@@ -15,7 +15,9 @@ const router = express.Router();
 ///////////////////////
 
 router.get('/', (req, res)=>{
-    res.render('base/index.ejs')
+    const loggedIn = req.oidc.isAuthenticated() ? true : false;
+    console.log(loggedIn)
+    res.render('base/index.ejs', {loggedIn: loggedIn})
 });
 
 ///////////////////////

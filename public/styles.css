@@ -7,6 +7,10 @@ body{
 
 
 /* DISPLAY STYLES */
+.inline{
+    display: inline;
+}
+
 .block{
     display: block;
 }
@@ -41,6 +45,18 @@ body{
 
 /* COLORS */
 
+.red{
+    background-color: rgba(255, 0, 0, .75);
+}
+
+.blue{
+    background-color: rgba(0, 0, 255, .6);
+}
+
+.black{
+    background-color: gray;
+}
+
 .whitesmoke{
     background-color: whitesmoke;
 }
@@ -53,14 +69,8 @@ body{
 background-color: rgb(168, 138, 138);
 }
 
-/* SIZE STYLINGS */
-.width-25{
-    width: 25%;
-}
+/* WIDTH STYLINGS */
 
-.width-50{
-    width: 50%;
-}
 
 .width-75{
     width: 75%;
@@ -73,8 +83,16 @@ background-color: rgb(168, 138, 138);
     width: 3em;
 }
 
-.height25{
-    height: 25em;
+.max-width15{
+    max-width: 15em;
+}
+
+.width-25{
+    width: 25%;
+}
+
+.width-50{
+    width: 50%;
 }
 
 .width-90{
@@ -85,12 +103,26 @@ background-color: rgb(168, 138, 138);
     max-width: 90%;
 }
 
-.max-height-60{
-    max-height: 60%;
+
+/* HEIGHT */
+.height03{
+    height: 3em;
 }
 
-.max-width15{
-    max-width: 15em;
+.height-75{
+    height: 75%;
+}
+
+.height25{
+    height: 25em;
+}
+
+.max-height-50{
+    max-height: 50%;
+}
+
+.max-height-60{
+    max-height: 60%;
 }
 
 .height-100{
@@ -111,7 +143,6 @@ background-color: rgb(168, 138, 138);
 }
 
 
-
 /* MARGIN */
 .margin-1{
     margin: 1em;
@@ -126,7 +157,12 @@ background-color: rgb(168, 138, 138);
     margin-bottom: 5em;
 }
 
+
 /* PADDING */
+.padding-1{
+    padding: 1em;
+}
+
 .padding-lt-2{
     padding-left: 2em;
 }
@@ -136,8 +172,32 @@ background-color: rgb(168, 138, 138);
     padding-bottom: 5em;
 }
 
+.padding-left2{
+    padding-left: 2em
+}
+
 
 /*  TEXT */
+
+a:visited.text-black{
+    color: black;
+}
+
+.bold-text{
+    font-weight: 900;
+}
+
+.red-text{
+    color: red;
+}
+
+.blue-text{
+    color: blue;
+}
+
+.black-text{
+    color: black;
+}
 
 .underline{
     text-decoration: underline;
@@ -203,18 +263,6 @@ nav{
     box-shadow: 4px 4px 6px darkgray;
 }
 
-.container{
-    padding: 2em 0 5em 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.subcontainer{
-    display: flex;
-    justify-content: space-around;
-}
 
 /* SHOW STYLINGS */
 .slide{
@@ -284,9 +332,16 @@ nav{
     border-spacing:5px 15px;
 }
 
+/* TABLE STYLINGS */
+
 .table-5-15{
     border-collapse:separate;
     border-spacing:5px 15px;
+}
+
+.table-50-15{
+    border-collapse:separate;
+    border-spacing:50px 15px;
 }
 
 .inline-block{

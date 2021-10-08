@@ -14,15 +14,15 @@
             <h3 class="center-text margin-025 underline"><%= course.title %></h3>
             <h4 class="center-text margin-025"><%= course.holes %> Hole</h4>
             <h5 class="margin-025"><%= course.type %> Course</h5>
-            <img class="width-90 max-height-60 border-black shadow-gray radius-5 margin-1" src="/images/<% if(course.type === "Disc Golf"){%>disc.png<%}else if(course.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt="">
+            <a class="flex row space-around width-90 max-height-60  margin-1" href="/mycourses/<%= course._id %>"><img class="border-black shadow-gray radius-5" style=" height: 100%;" class="radius-5" src="/images/<% if(course.type === "Disc Golf"){%>disc.png<%}else if(course.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt=""></a>
             <div class="actions">
                 <a href="/mycourses/<%= course._id %>"><button>Details</button></a>
             </div>
         </div>
 
     
-    <% } %>
-</div>
+        <% } %>
+    </div>
 
 
     <%- include("../partials/footer.ejs") %> 
