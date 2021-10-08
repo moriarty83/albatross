@@ -52,11 +52,11 @@
                 
             </div>
 
-            <div class="actions">
-                <% if(!game.complete){%> <a href="/game/<%= game._id %>/edit"><button>Continue Game</button></a> <% } %>
+            <div class="flex row space-around wrap width-50 margin-1">
+                <% if(!game.complete){%> <a href="/game/<%= game._id %>/edit"><button class="button-1 margin-025">Continue Game</button></a> <% } %>
 
                 <form action="/game/<%= game._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
-                    <input type="submit" value="Delete Game">
+                    <input class="button-2 margin-025" type="submit" value="Delete Game">
                 </form>
             </div>
 

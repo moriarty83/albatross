@@ -61,17 +61,19 @@
             <input type="checkbox" name="completed" id="completed">
 
             <br>
+            <br>            
+            <input class="button-1 margin-025" name="action" type="submit" id="submitButton" value="Save & Continue">
+            <br>
             <br>
             <input type="hidden" name="returnHome" id="returnHome" ="false">
-            <button onclick="submitReturn()">Save & Leave Game</button>
-            <br><br>
-            <input class="width15" name="action" type="submit" id="submitButton" value="Save & Continue">
+            <button class="button-1 margin-025" onclick="submitReturn()">Save & Leave Game</button>
+            
             
 
         
         </form>
         <br>
-        <a href="/game/<%= game._id %>"><button>Discard Changes</button></a>
+        <a href="/game/<%= game._id %>"><button class="button-2 margin-1">Discard Changes</button></a>
 
         
     </div>

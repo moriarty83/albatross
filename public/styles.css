@@ -35,6 +35,10 @@ body{
     justify-content: space-around;
 }
 
+.space-between{
+    justify-content: center;
+}
+
 .justify-center{
     justify-content: center;
 }
@@ -208,9 +212,19 @@ a:visited.text-black{
 }
 
 /* NAVBAR STYLES */
-nav{
+
+footer{
+    z-index: 1;
+    position: relative;
+    box-shadow: 0px -4px 4px darkgray;
+}
+
+header{
+    z-index: 1;
+    position: relative;
     box-shadow: 0px 4px 4px darkgray;
 }
+
 .nav-container{
     height: 8em;
     display: flex;
@@ -365,7 +379,32 @@ nav{
     box-shadow: 2px 2px 2px gray;
 }
 
-/* button{
-    height:15px;
-    background-color: red;
-} */
+/* BUTTON STYLINGS */
+
+.button-1{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: 18px;
+    min-width: 100px;
+    padding: 4px 8px;
+    background-color: #4bab4e;
+}
+
+.button-1:hover{
+    background-color: #58c95c;
+}
+
+.button-2{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: 18px;
+    min-width: 100px;
+    padding: 4px 8px;
+    background-color: #daa319;
+}
+
+.button-2:hover{
+    background-color: #fabe26;
+}

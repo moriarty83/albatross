@@ -36,12 +36,13 @@
                 </div>
             </div>
             <% if(canEdit === true){%>
-            <div class="flex row space-around margin-1">
-                <a href="/mycourses/<%= course._id %>/edit"><button>Edit Course</button></a>
+            <div class="flex row space-between center-items margin-1 width-50">
+                <a href="/mycourses/<%= course._id %>/edit"><button class="button-1 margin-025">Edit</button></a>
                 <form action="/mycourses/<%= course._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
-                    <input type="submit" value="Delete Course">
+                    <input class="button-2 margin-025" type="submit" value="Delete">
                 </form>
             </div>
+            
             <% } %>
         </div>
 

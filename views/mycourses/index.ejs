@@ -8,21 +8,23 @@
     
 <body>
     <%- include("../partials/header.ejs") %>
+    <main style="z-index: 0;">
     <div class="flex row wrap space-around whitesmoke">
         <% for(course of courses) { %>
-        <div class="flex column spacing-around center-items width15 height25 border-black shadow-gray radius-5 margin-1">
+        <div class="white flex column spacing-around center-items width15 height25 border-black shadow-gray radius-5 margin-1">
             <h3 class="center-text margin-025 underline"><%= course.title %></h3>
             <h4 class="center-text margin-025"><%= course.holes %> Hole</h4>
             <h5 class="margin-025"><%= course.type %> Course</h5>
             <a class="flex row space-around width-90 max-height-60  margin-1" href="/mycourses/<%= course._id %>"><img class="border-black shadow-gray radius-5" style=" height: 100%;" class="radius-5" src="/images/<% if(course.type === "Disc Golf"){%>disc.png<%}else if(course.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt=""></a>
             <div class="actions">
-                <a href="/mycourses/<%= course._id %>"><button>Details</button></a>
+                <a href="/mycourses/<%= course._id %>"><button class="button-1">Details</button></a>
             </div>
         </div>
 
     
         <% } %>
     </div>
+</main>
 
 
     <%- include("../partials/footer.ejs") %> 
