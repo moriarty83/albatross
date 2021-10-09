@@ -18,13 +18,14 @@ const router = express.Router();
 
 // Index
 router.get('/', (req, res)=>{
+    console.log("Query");
     console.log(req.query);
     req.query.isPublic = true;
+    let newreg = '/${req.query.location}/'
+    console.log(newreg)
     for(const key in req.query){
-        console.log(req.query[key]);
         if (req.query[key] === ''){ delete req.query[key];}
         else {req.query[key] = (req.query[key].toString()).replace("_", " ");}
-        if(key === "location"){req.query[key] = {$regex: `/(${req.query[key]})/`,} }
     }
     console.log(req.query);
     Course.find(req.query, "-createdBy", (err, foundCourses)=>{
