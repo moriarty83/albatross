@@ -19,7 +19,7 @@ const config = {
 	authRequired: false,
 	auth0Logout: true,
 	secret: process.env.AUTH0_CLIENT_SECRET,
-	baseURL: 'https://ablatross-golf.herokuapp.com/mycourses',
+	baseURL: 'http://localhost:3000',
 	clientID: 'yEqtB27DBHpzdGebqWUsZ8gxEshgG94p',
 	issuerBaseURL: 'https://dev-oxzyqg97.us.auth0.com'
   };
