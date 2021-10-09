@@ -3,7 +3,34 @@
 <%- include("../partials/head.ejs") %>
 <body>
     <%- include("../partials/header.ejs") %>
-    
+    <div class="flex column space-between center-items">
+        <h1 class="underline">Albatross</h1>
+        <h3>Personal Golf Tracker</h3>
+        <br>
+        <br>
+        
+        <div class="flex column space-around wrap center-items width-100">
+
+            <div class="flex row space-around width-50">
+                <a class="flex column center-items border-black shadow-gray radius-5 margin-1 width-30 black text-black" href="/login">
+                    <h2>Login</h2>
+                    <img class="width-50" src="/images/login.png" alt="">
+                </a>
+
+                <a class="flex column center-items border-black shadow-gray radius-5 margin-1 width-30 black text-black" href="/mycourses">
+                    <h2>Courses</h2>
+                    <img class="width-50" src="/images/public.png" alt="">
+                </a>
+
+                <a class="flex column center-items border-black shadow-gray radius-5 margin-1 width-30 black text-black" href="/login">
+                    <h2>Sign Up</h2>
+                    <img class="width-50" src="/images/registericon.png" alt="">
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="margin-1"></div>
     <%- include("../partials/footer.ejs") %>
 </body>
 </html>
