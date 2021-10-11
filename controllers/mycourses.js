@@ -128,7 +128,7 @@ router.get('/:id', requiresAuth(), (req, res) => {
       }
       console.log(foundGames.length);
     });
-    // const canEdit = foundCourse.createdBy === req.oidc.user.email ? true : false;
+    const canEdit = foundCourse.createdBy === req.oidc.user.email ? true : false;
     res.render('mycourses/show.ejs', {'course': foundCourse, 'canEdit': canEdit, loggedIn: loggedIn});
   });
 });
