@@ -125,7 +125,6 @@ router.get('/:id', requiresAuth(), (req, res) => {
   Course.findById(req.params.id, (error, foundCourse)=>{
     Game.find({courseId: req.params.id}, (err, foundGames)=>{
       if(foundGames.length>0){
-        const avgTotalPar
       }
       console.log(foundGames.length);
     });

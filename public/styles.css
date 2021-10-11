@@ -109,6 +109,10 @@ background-color: rgb(168, 138, 138);
     width: 50%;
 }
 
+.width-60{
+    width: 60%;
+}
+
 .width-90{
     width: 90%;
 }
@@ -426,6 +430,9 @@ header{
 @media (max-width: 400px) {
     .shrink-me{
         font-size: .75em;
+    }
+    .double-shrink-me{
+        font-size: .4em;
     }
     
 }
