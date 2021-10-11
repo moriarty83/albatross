@@ -5,9 +5,13 @@
     <%- include("../partials/header.ejs") %>
     <div class="flex wrap column center-items space-around whitesmoke">
         <div class="flex wrap column center-items white margin-1 border-black shadow-gray radius-5 width-75">
-            <h1 class="underline"><%= course.title %></h1>
+            <h1 class="underline center-text"><%= course.title %></h1>
             <h2 class="center-text"><%= course.holes %> Hole <%= course.type %> Course</h2>
-                
+            <% if(course.gamesPlayed > 0 && course.gamesPlayed != undefined && canEdit === true){%>
+            <div class="flex row space-around wrap">
+                <h4 class="center-text margin-025"><%= course.gamesPlayed %> Games Played</h4><h4 class="center-text margin-025">Average Score: <%= course.averageTotalScore %></h4><h4 class="center-text margin-025">Most Recent Score: <%= course.lastTotalScore %></h4>
+            </div>
+            <% } %>
             <div class="flex column space-around center-items wrap width-75 holes-details border-black shadow-gray radius-5 whitesmoke">
                 <img class="width15 max-width-90 margin-1 shadow-gray border-black radius-5" src="/images/puttputt.png" alt="">
                 
@@ -19,28 +23,44 @@
                     <% for(let i = 0; i < columns; i++){ %>
                         <div>
                         <table class="table-5-15 inline-block">
-                        <th class="white border-black radius-5">Hole</th><th class="width3 white border-black radius-5 inline-block">Par</th>
+                        <th class="white border-black radius-5 center-text">Hole</th><th class="width3 white border-black radius-5 inline-block center-text">Par</th>
+                        <%if(course.gamesPlayed > 0 && course.gamesPlayed != undefined && canEdit === true){%> <th class="white border-black radius-5 center-text">Your Avg.</th> <%}%>
                         <% for(let j = 0; j < rows; j++){ %>
                             <% if((i+1)*(j+1) <= course.pars.length){%>
                             <tr >
-                                <td class="white border-black radius-5"><%= j + rows*i + 1 %></td>
-                                <td class="white border-black radius-5"><%= course.pars[j + rows*i] %></td>
+                                <td class="white border-black radius-5 center-text"><%= j + rows*i + 1 %></td>
+                                <td class="white border-black radius-5 center-text"><%= course.pars[j + rows*i] %></td>
+                                <% if(course.gamesPlayed > 0 && course.gamesPlayed != undefined && canEdit === true){%>
+                                    <td class="<% let diff = course.averageStrokes[j + rows*i] - course.pars[j + rows*i];
+                                     if(course.averageStrokes[j + rows*i] === 0 || course.averageStrokes[j + rows*i] === null){%> {%>whitesmoke<%}
+                                else if ((diff) < -0.5){%>blue<%} 
+                                else if ((diff) > .5){%>red<%}
+                                else if (diff > -0.5 && diff < 0.5){%>black<%}
+                                else{%> whitesmoke <% } %> border-black radius-5 center-text"><%=course.averageStrokes[j + rows*i]%></td> <% } %>
                             </tr>
                             <% } %>
                         <% } %>
                         </table>
+                        
                     </div>
                     <% } %>
-
                     
                 </div>
             </div>
             <% if(canEdit === true){%>
             <div class="flex row space-between center-items margin-1 width-50">
                 <a href="/mycourses/<%= course._id %>/edit"><button class="button-1 margin-025">Edit</button></a>
-                <form action="/mycourses/<%= course._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
-                    <input class="button-2 margin-025" type="submit" value="Delete">
+                <form action="/game?_method=POST" method="POST">
+                    <input type="hidden" name="course" value="<%= course._id %>">
+                    <input class="button-1 margin-025" type="submit" value="Play Course">
                 </form>
+            </div>
+
+            <div class="flex row space-between center-items margin-1 width-50">
+           
+            <form action="/mycourses/<%= course._id %>?_method=DELETE" method="POST" onClick="return confirmSubmit()">
+                <input class="button-2 margin-025" type="submit" value="Delete">
+            </form>
             </div>
             
             <% } %>

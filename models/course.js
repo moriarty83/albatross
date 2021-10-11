@@ -9,6 +9,11 @@ const courseSchema = new Schema(
         holes: Number,
         pars: [Number],
         totalPar: Number,
+        averageStrokes: [Number],
+        lastStrokes: [Number],
+        averageTotalScore: Number,
+        lastTotalScore: Number,
+        gamesPlayed: Number,
         location: String,
         createdBy: String,
         isPublic: Boolean

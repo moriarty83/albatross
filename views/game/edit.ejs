@@ -11,8 +11,8 @@
             else if (game.totalScore === 0){%> black-text <%} 
             else {%> red-text<%}%> bold-text"><%= game.totalScore %></span></h3>
 
-        <form class="flex wrap column space-around center-items white border-black shadow-gray radius-5 padding-1 width-90" action="/game/<%= game._id %>?_method=PUT" class="width-50 margin-1" method="POST">
-            <fieldset class="width-90">
+        <form class="flex wrap column space-around center-items white border-black shadow-gray radius-5 padding-1 width-90" action="/game/<%= game._id %>?_method=PUT" method="POST">
+            <fieldset class="flex column space-around center-items width-90">
                 <legend>Pars</legend>
                 <div class="flex row space-around wrap center-items width-90">
 
@@ -21,10 +21,11 @@
                 
                     <% for(let i = 0; i < columns; i++){ %>
                         
-                        <table class="table-5-15">
+                        <table class="table-5-15 shrink-me">
                             <tr>
                                 <th class="whitesmoke border-black radius-5 padding-1 center-text">Hole</th>
                                 <th class="width3 whitesmoke border-black radius-5 padding-1 center-text">Par</th>
+                                <%if(course.gamesPlayed > 0 && course.gamesPlayed != undefined){%> <th class="white border-black radius-5 center-text">Your Avg.</th> <%}%>
                                 <th class="width3 whitesmoke border-black radius-5 padding-1 center-text">Strokes</th>
                                 <!-- <th class="whitesmoke border-black radius-5 padding-1 center-text">Comments</th> -->
                             </tr>
@@ -33,6 +34,15 @@
                             <tr >
                                 <td class="whitesmoke border-black radius-5 center-text"><%= j + rows*i + 1 %></td>
                                 <td class="whitesmoke border-black radius-5 center-text "><%= game.pars[j + rows*i] %></td>
+
+                                <% if(course.gamesPlayed > 0 && course.gamesPlayed != undefined){%>
+                                    <td class="<% let diff = course.averageStrokes[j + rows*i] - course.pars[j + rows*i];
+                                     if(course.averageStrokes[j + rows*i] === 0 || course.averageStrokes[j + rows*i] === null){%> {%>whitesmoke<%}
+                                else if ((diff) < -0.5){%>blue<%} 
+                                else if ((diff) > .5){%>red<%}
+                                else if (diff > -0.5 && diff < 0.5){%>black<%}
+                                else{%> whitesmoke <% } %> border-black radius-5 center-text"><%=course.averageStrokes[j + rows*i]%></td> <% } %>
+
                                 <td class="<% if(game.strokes[j + rows*i] === 0 || game.strokes[j + rows*i] === null){%> {%>whitesmoke<%}
                                     else if (game.strokes[j + rows*i] < game.pars[j + rows*i]){%>blue<%} 
                     

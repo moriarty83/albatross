@@ -4,6 +4,7 @@
 const express = require('express');
 const Course = require("../models/course.js")
 const { requiresAuth } = require('express-openid-connect');
+const Game = require('../models/game.js');
 
 ///////////////////////
 // ROUTER
@@ -118,10 +119,17 @@ router.get('/:id/editholes', requiresAuth(), (req, res)=>{
 });
 
 // Show
+// TODO: Add requires auth to this route after testing.
 router.get('/:id', requiresAuth(), (req, res) => {
   const loggedIn = req.oidc.isAuthenticated() ? true : false;
   Course.findById(req.params.id, (error, foundCourse)=>{
-    const canEdit = foundCourse.createdBy === req.oidc.user.email ? true : false;
+    Game.find({courseId: req.params.id}, (err, foundGames)=>{
+      if(foundGames.length>0){
+        const avgTotalPar
+      }
+      console.log(foundGames.length);
+    });
+    // const canEdit = foundCourse.createdBy === req.oidc.user.email ? true : false;
     res.render('mycourses/show.ejs', {'course': foundCourse, 'canEdit': canEdit, loggedIn: loggedIn});
   });
 });

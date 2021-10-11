@@ -422,3 +422,10 @@ header{
 .button-2:hover{
     background-color: #fabe26;
 }
+
+@media (max-width: 400px) {
+    .shrink-me{
+        font-size: .75em;
+    }
+    
+}

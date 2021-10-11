@@ -27,7 +27,7 @@ router.get('/', (req, res)=>{
 })
 
 // New
-router.get('/new', (req, res)=>{
+router.get('/new', requiresAuth(), (req, res)=>{
     const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Course.find({createdBy: req.oidc.user.email}, (err, foundCourses)=>{
         res.render('game/new.ejs', {'courses': foundCourses, loggedIn: loggedIn});
@@ -35,14 +35,14 @@ router.get('/new', (req, res)=>{
 });
 
 // Delete
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', requiresAuth(), (req, res)=>{
     Game.findByIdAndDelete(req.params.id, (err, deletedCourse)=>{
         res.redirect('/game')
     });
 });
 
 // Update
-router.put('/:id', (req, res)=>{
+router.put('/:id', requiresAuth(), (req, res)=>{
     // Declare attributes to be sent in update.
     const attributes = {strokes: [], holeNotes : [], gameNotes: '', holeScore:[], totalScore: 0, totalStrokes: 0, complete: false }
     // Is game Complete
@@ -64,13 +64,55 @@ router.put('/:id', (req, res)=>{
                 attributes.holeScore.push((+attributes.strokes[i])-(+foundGame.pars[i]))
             }
         }
-        
         // Calculates score for hole.
         attributes.totalScore = attributes.holeScore.reduce((a, b) => a + b, 0);
+
+        let totalGames = 0;
+        let avgTotalScore = 0;
+        let avgStrokes = []
+
+            Game.find({courseId: foundGame.courseId, complete: true}, (err, foundGames)=>{
+                if(attributes.complete === true){
+                    console.log(foundGames.length)
+                    totalGames = foundGames.length + 1;
+                    console.log(totalGames);
+
+                    for(let i = 0; i < attributes.holeScore.length; i++){
+                        let avg = 0;
+                        for(game of foundGames){
+                            console.log(`Game Score: ${game.totalScore}`)
+
+                            avgTotalScore = +avgTotalScore + (+game.totalScore);
+                            console.log(`avgTotalScore: ${avgTotalScore}`)
+                            avg = avg + game.strokes[i]
+                        }
+
+                        
+                        avgTotalScore = ((avgTotalScore + attributes.totalScore)/totalGames).toFixed(2);
+                        avg = avg + attributes.strokes[i];
+                        avg = (avg/totalGames).toFixed(1);
+                        avgStrokes.push(avg);
+
+                        console.log(totalGames)
+                        console.log("AvgTotal")
+                        console.log(avgTotalScore)
+                        console.log(avgStrokes.length)
+
+                    }
+                    Course.findByIdAndUpdate(game.courseId, {gamesPlayed: totalGames, averageStrokes: avgStrokes, averageTotalScore: avgTotalScore, lastTotalScore: attributes.totalScore, lastStrokes: attributes.strokes}, {new: true}, (err, updatedCourse)=>{
+                    });  
+                }
+
+            });
+            
+        
 
 
         // Updates Game
         Game.findByIdAndUpdate(req.params.id, attributes, {new: true}, (err, updatedGame)=>{
+            if(attributes.complete === true){
+
+            }
             if(attributes.complete || req.body.returnHome === "true"){
                 res.redirect('/game/'+req.params.id)
             }
@@ -86,14 +128,15 @@ router.put('/:id', (req, res)=>{
 });
 
 // Create
-router.post('/', (req, res)=>{
+router.post('/', requiresAuth(), (req, res)=>{
     Course.findById(req.body.course, (err, foundCourse)=>{
         let newHoles = [];
+        
 
         let newGame = new Game({
             course: foundCourse.title,
             courseId: foundCourse._id,
-            date: req.body.date,
+            date: req.body.date !== undefined ? req.body.date : Date.now(),
             type: foundCourse.type,
             pars: foundCourse.pars,
             totalPar: foundCourse.pars.reduce((a, b) => a + b, 0),
@@ -114,15 +157,17 @@ router.post('/', (req, res)=>{
 });
 
 // Edit
-router.get('/:id/edit', (req, res)=>{
+router.get('/:id/edit', requiresAuth(), (req, res)=>{
     const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Game.findById(req.params.id, (err, foundGame)=>{
-        res.render('game/edit.ejs', {'game': foundGame, loggedIn: loggedIn});
+        Course.findById(foundGame.courseId, (err, foundCourse)=>{
+            res.render('game/edit.ejs', {'game': foundGame, 'course': foundCourse, loggedIn: loggedIn});
+        });
     }); 
 });
 
 // Show
-router.get('/:id', (req, res)=>{
+router.get('/:id', requiresAuth(), (req, res)=>{
     const loggedIn = req.oidc.isAuthenticated() ? true : false;
     Game.findById(req.params.id, (err, foundGame)=>{
         res.render('game/show.ejs', {'game': foundGame, loggedIn: loggedIn})
