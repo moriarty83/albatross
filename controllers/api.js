@@ -22,13 +22,13 @@ router.get('/', (req, res)=>{
     console.log(req.query);
     req.query.isPublic = true;
     let newreg = '/${req.query.location}/'
-    console.log(newreg)
+    
     for(const key in req.query){
         if (req.query[key] === ''){ delete req.query[key];}
         else {req.query[key] = (req.query[key].toString()).replace("_", " ");}
     }
-    console.log(req.query);
-    Course.find(req.query, "-createdBy", (err, foundCourses)=>{
+    const omissions = "-createdBy -lastStrokes -averageTotalScore -lastTotalScore -gamesPlayed -averageStrokes"
+    Course.find(req.query, omissions, (err, foundCourses)=>{
         res.json(foundCourses);
     });
 });
