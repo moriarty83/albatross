@@ -95,6 +95,10 @@ background-color: rgb(168, 138, 138);
     width: 3em;
 }
 
+.width10{
+    width: 10em;
+}
+
 .max-width15{
     max-width: 15em;
 }
