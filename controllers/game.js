@@ -17,8 +17,9 @@ const router = express.Router();
 ///////////////////////
 
 // Index
-router.get('/', (req, res)=>{
+router.get('/', requiresAuth(), (req, res)=>{
     const loggedIn = req.oidc.isAuthenticated() ? true : false;
+    console.log(req.oidc.user.email)
     filter = req.query.filter === "inprogress" ? {user: req.oidc.user.email, complete: false} : req.query.filter === "complete" ? {user: req.oidc.user.email, complete: true} : {user: req.oidc.user.email};
     console.log(filter);
     Game.find(filter, (err, foundGames)=>{
