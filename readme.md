@@ -9,6 +9,7 @@ Albatross is a web application that allows users to create a personal library of
 Why Albatross? Albatross referes to the the instance in golf where a player completes a hole three strokes under par; a rare and remarkable achievement.
 
 ### Screenshots
+![mockups](public/images/screenshots.png)
 
 ### Technologies
 - JavaScript
