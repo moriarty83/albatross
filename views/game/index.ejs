@@ -11,7 +11,7 @@
             <h3 class="center-text margin-025 underline"><%= game.course %></h3>
             <h4 class="center-text margin-025"><%= game.pars.length %> Holes</h4>
             <h5 class="margin-025"><%= game.type %> Course</h5>
-            <a class="flex row space-around width-90 max-height-50  margin-1" href=""><div class="flex space-around center-items"> <%if game.complete === true){%><img class="absolute width10" src="/images/complete.png" alt=""><%}%><img class="border-black shadow-gray radius-5" style=" height: 100%;" class="radius-5" src="/images/<% if(game.type === "Disc Golf"){%>disc.png<%}else if(game.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt=""></div></a>
+            <a class="flex row space-around width-90 max-height-50  margin-1" href=""><div class="flex space-around center-items"><% if(game.complete){ %> <img class="absolute width10" src="/images/complete.png" alt=""> <%}%><img class="border-black shadow-gray radius-5" style=" height: 100%;" class="radius-5" src="/images/<% if(game.type === "Disc Golf"){%>disc.png<%}else if(game.type === "Putt Putt"){%>puttputt.png<%}else{%>traditional.png<%}%>" alt=""></div></a>
             <h5 class="margin-025"><%= game.location %></h5>
             <div class="actions">
                 <a href="/game/<%= game._id %>"><button class="button-1">Details</button></a>
