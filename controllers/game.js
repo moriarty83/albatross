@@ -99,7 +99,7 @@ router.put('/:id', requiresAuth(), (req, res)=>{
                         console.log(avgStrokes.length)
 
                     }
-                    Course.findByIdAndUpdate(game.courseId, {gamesPlayed: totalGames, averageStrokes: avgStrokes, averageTotalScore: avgTotalScore, lastTotalScore: attributes.totalScore, lastStrokes: attributes.strokes}, {new: true}, (err, updatedCourse)=>{
+                    Course.findByIdAndUpdate(foundGame.courseId, {gamesPlayed: totalGames, averageStrokes: avgStrokes, averageTotalScore: avgTotalScore, lastTotalScore: attributes.totalScore, lastStrokes: attributes.strokes}, {new: true}, (err, updatedCourse)=>{
                     });  
                 }
 
