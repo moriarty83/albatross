@@ -75,8 +75,7 @@ router.put('/:id', requiresAuth(), (req, res)=>{
             Game.find({courseId: foundGame.courseId, complete: true}, (err, foundGames)=>{
                 if(attributes.complete === true){
                     console.log(foundGames.length)
-                    totalGames = foundGames.length + 1;
-                    console.log(totalGames);
+                    totalGames = foundGame.complete ? foundGames.length : foundGames.length + 1;
 
                     for(let i = 0; i < attributes.holeScore.length; i++){
                         let avg = 0;

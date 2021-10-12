@@ -24,7 +24,7 @@ router.get ('/', (req, res) =>{
   if(req.oidc.isAuthenticated())
   {
     console.log("logged in")
-     filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
+    filter = filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
   }
   // If not authenticated, only shows public items.
   else{
@@ -119,7 +119,6 @@ router.get('/:id/editholes', requiresAuth(), (req, res)=>{
 });
 
 // Show
-// TODO: Add requires auth to this route after testing.
 router.get('/:id', requiresAuth(), (req, res) => {
   const loggedIn = req.oidc.isAuthenticated() ? true : false;
   Course.findById(req.params.id, (error, foundCourse)=>{
