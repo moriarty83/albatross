@@ -3,7 +3,9 @@ body{
     font-family: 'Major Mono Display', monospace;
 }
 
-
+.cursor-pointer{
+    cursor: pointer;
+}
 
 
 /* DISPLAY STYLES */
