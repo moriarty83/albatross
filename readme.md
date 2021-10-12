@@ -22,6 +22,7 @@ Why Albatross? Albatross referes to the the instance in golf where a player comp
 - Course API
 
 ### Getting Started
+Visit: https://albatross4golf.herokuapp.com/
 
 To use all of the features of Albatross all that is needed is a login. The site uses Auth0 user authentication and authorization and you can create an account using a valid e-mail or using an existing Gmail.
 
