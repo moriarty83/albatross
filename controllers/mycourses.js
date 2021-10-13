@@ -24,7 +24,7 @@ router.get ('/', (req, res) =>{
   if(req.oidc.isAuthenticated())
   {
     console.log("logged in")
-    filter = filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {};
+    filter = filterQuery==='user' ? {createdBy: req.oidc.user.email} : filterQuery==='public' ? {isPublic: true} : {isPublic: true};
   }
   // If not authenticated, only shows public items.
   else{

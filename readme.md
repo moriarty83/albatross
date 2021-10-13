@@ -43,10 +43,11 @@ The following filters can be added as queries in the URL:
 - holes
     - Example: https://albatross4golf.herokuapp.com/api?holes=18
 - totalPar
-    - Example: - holes
     - Example: https://albatross4golf.herokuapp.com/api?totalPar=53
 
 ### Next Steps
 - Allow users to copy a public course into their personal library.
+- UI Updates: link games to their courses.
+- On Game Edit allow game complete only if all holes have values.
 - Game scorecards that allow for tracking more than one players in a single game.
 - Enhanced filtering of games and courses by date, name & type.
