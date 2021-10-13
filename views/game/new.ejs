@@ -7,13 +7,15 @@
     <div class="flex column space-around center-items padding-2-5 whitesmoke">
         <form class="flex column space-around center-items width-50 padding-1" action="/game" method="POST">
             <fieldset class="white flex column space-around center-items width-90">
-                <legend>New Game</legend>
-                    <div class="flex column space-around center-items margin-1">
+                <legend>
+                    New Game
+                </legend>
+                <div class="flex column space-around center-items margin-1">
                     <label for="date">Date</label><br>
                     <input type="date" name="date" id="date" required>
-                    </div>
+                </div>
                     <br>
-                    <div class="flex column space-around center-items margin-1">
+                <div class="flex column space-around center-items margin-1">
                         <label for="course">Course</label><br>
                         <select name="course" id="course" required>
                             <option value="" disabled selected hidden>Choose a course</option>
@@ -21,15 +23,15 @@
                             <option value="<%= course._id %>"><%= course.title %>: <%= course.holes %> Hole <%= course.type %> Course, <%= course.location %></option>
                             <% } %>
                         </select>
-                    </div>
+                </div>
                     
-                    <div class="flex column space-around center-items">
+                <div class="flex column space-around center-items">
                     <input class="button-1" type="submit" value="Start Game">
-                    </div>
+                </div>
                     <br>
                     <br>
                     
-                </div>             
+                          
             </fieldset>   
         </form>
         <div class="width-90 margin-025">
