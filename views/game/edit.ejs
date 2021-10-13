@@ -98,12 +98,14 @@
         const inputs = $(".strokes-input");
         const completed = $("#completed");
 
+        completed.click(function(){
         if(completed.is(':checked')){
             inputs.attr("required", "true");
         }
         else{
             inputs.attr("required", "false");
-        }
+        }}
+        )
 
 
     </script>
