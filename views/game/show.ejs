@@ -6,7 +6,7 @@
     <div class="flex column space-around center-items whitesmoke">
         <div class="game-slide">
                 <div class="game-title">
-                <h1 class="center-text"><%= game.course %></h1>
+                <h1 class="center-text"> <a class="text-black" href="/mycourses/<%= game.courseId %>"> <%= game.course %></a></h1>
                 <h2 class="center-text"><%= (game.date.toString()).slice(0,15) %></h2>
             </div>
             <div class="flex row space-around center-items width-75 height03">

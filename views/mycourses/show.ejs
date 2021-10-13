@@ -35,7 +35,7 @@
                                      if(course.averageStrokes[j + rows*i] === 0 || course.averageStrokes[j + rows*i] === null){%> {%>whitesmoke<%}
                                 else if ((diff) < -0.5){%>blue<%} 
                                 else if ((diff) > .5){%>red<%}
-                                else if (diff > -0.5 && diff < 0.5){%>black<%}
+                                else if (diff >= -0.5 && diff <= 0.5){%>black<%}
                                 else{%> whitesmoke <% } %> border-black radius-5 center-text"><%=course.averageStrokes[j + rows*i]%></td> <% } %>
                             </tr>
                             <% } %>
