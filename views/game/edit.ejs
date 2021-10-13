@@ -48,7 +48,7 @@
                     
                                     else if (game.strokes[j + rows*i] > game.pars[j + rows*i]){%>red<%}
                                     else if (game.strokes[j + rows*i] === game.pars[j + rows*i]){%>black<%}
-                                    else{%> whitesmoke <% } %> border-black radius-5 center-text"><input class="margin-025 width3 center-text" type="number" name="strokes<%=j+rows*i%>" id="" <% if(game.strokes[j+rows*i]===0 || game.strokes[j+rows*i]=== null){%> value="" <%} else{ %>  value=<%= game.strokes[j+rows*i]%><%}%>></td>
+                                    else{%> whitesmoke <% } %> border-black radius-5 center-text"><input class="margin-025 width3 center-text strokes-input" type="number" name="strokes<%=j+rows*i%>" id="" <% if(game.strokes[j+rows*i]===0 || game.strokes[j+rows*i]=== null){%> value="" <%} else{ %>  value=<%= game.strokes[j+rows*i]%><%}%>></td>
                                 <!-- <td class="whitesmoke border-black radius-5 center-text"><input class="margin-025 center-text" type="text" name="notes<%=j+rows*i%>" id="" value=<%= game.holeNotes[j+rows*i]%>></td> -->
 
                             </tr>
@@ -89,13 +89,23 @@
         
     </div>
     <%- include("../partials/footer.ejs") %>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script>
         function submitReturn (){
             document.getElementById("returnHome").value = "true";
             document.getElementById("submitButton").submit();
-
         }
+        const inputs = $(".strokes-input");
+        const completed = $("#completed");
+
+        if(completed.is(':checked')){
+            inputs.attr("required", "true");
+        }
+        else{
+            inputs.attr("required", "false");
+        }
+
+
     </script>
 </body>
 </html>
