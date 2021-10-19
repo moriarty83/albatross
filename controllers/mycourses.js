@@ -94,6 +94,17 @@ router.post('/', requiresAuth(), (req, res)=>{
   });
 });
 
+// Copy Course
+router.post('/copy'), requiresAuth(), (req, res)=>{
+  Course.findById(req.body.courseId, (err, foundCourse)=>{
+    newCourse = new Course(foundCourse);
+    newCourse.createdBy = req.oidc.user.email;
+    newCourse.save(newCourse, (err, newCourse)=>{
+      res.redirect('/mycourses/'+newCourse._id);
+    });
+  });
+}
+
 // Edit Course
 router.get('/:id/edit', requiresAuth(), (req, res)=>{
   const loggedIn = req.oidc.isAuthenticated() ? true : false;
