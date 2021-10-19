@@ -65,12 +65,12 @@
             
             <% } %>
 
-            <% } if(canEdit === false){%>
+            <% if(canEdit === false){%>
                 <form action="/mycourses/copy" method="POST" onClick="return confirmSubmit()">
                     <input type="hidden" name="courseId" value=<%= course._id%>>
                     <input class="button-1 margin-025" type="submit" value="Add to My Library">
                 </form>
-            }
+            <% } %>
         </div>
 
     </div>
